@@ -43,7 +43,6 @@ if args.login_pass:
     login_pass = args.login_pass
 
 dest_dir = csvname.split('.csv')[0]
-dest_dir = dest_dir + '/'
 
 if not os.path.isdir(dest_dir):
     try:
@@ -143,7 +142,7 @@ def download_items(url_set, dest_dir, image_num):
     for index, url in enumerate(url_set):
         path = dest_dir + image_num + str(i) + ".jpg"
         i += 1
-        # print(path)
+        print(path)
         try:
             urllib.request.urlretrieve(url, path)
         except:
