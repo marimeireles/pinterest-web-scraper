@@ -108,7 +108,7 @@ def get_images_and_tags(url):
 
         # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
-        # print(new_height)
+        print(new_height)
 
         if new_height >= 15000:								# increase this scroll height threshould to get more no. of images
             break
