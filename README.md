@@ -49,6 +49,14 @@ $ sudo chmod +x /usr/bin/chromedriver
 
 ```
 
+colab:
+
+```console
+!apt-get update
+!apt install chromium-chromedriver
+!cp /usr/lib/chromium-browser/chromedriver /usr/bin
+```
+
 ### Usage
 
 ##### 1. Search for some product
