@@ -163,8 +163,7 @@ for i in range(len(urls)):
     pin_number = urls[i].split('/')[-3]
 
     image_urlCSV = pd.DataFrame({'URLs': image_urlset})
-    image_urlCSV.to_csv(str(dest_dir) + str(pin_number) +
-                        '/' + str(pin_number) + '_URLs' + '.csv', index=False)
+    image_urlCSV.to_csv(str(dest_dir) + '/' + str(pin_number) + '_URLs' + '.csv', index=False)
 
     # tagsCSV = pd.DataFrame({'Tags':tag_set})
     # tagsCSV.to_csv(str(dest_dir) + str(pin_number) + '/' + str(pin_number) + '_tags' + '.csv',index = False)
