@@ -8,6 +8,11 @@ import os
 from selenium.webdriver.support import ui
 import time
 
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+
 parser = argparse.ArgumentParser()
 parser.add_argument(
     '--saveto', help='Target CSV to save the Image URLs', action='store', dest='CSVname')
@@ -43,7 +48,7 @@ else:
 	login_pass = str(input('Enter the pinterest password: '))
 
 # Initialize and launch the chrome driver
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options = options)
 driver.get("https://www.pinterest.com")
 
 driver.implicitly_wait(20)

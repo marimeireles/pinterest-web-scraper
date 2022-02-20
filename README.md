@@ -54,7 +54,7 @@ $ sudo chmod +x /usr/bin/chromedriver
 ##### 1. Search for some product
 
 ```console
-$ python pinterest.py 
+$ python pinterest.py
 ```
 
 or pass the search query category as a argument
