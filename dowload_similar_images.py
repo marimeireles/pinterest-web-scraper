@@ -9,48 +9,54 @@ from selenium.webdriver.support import ui
 import time
 import os
 
+csvname = ""
+no_subdir = False
+login_name = ""
+login_pass = ""
+
 # add argument parser for passing the target CSV for saving the image URLs and no. of pages to be scraped
 parser = argparse.ArgumentParser()
 parser.add_argument('--csv', help='CSV with PID URLs',
-                    action='store', dest='CSVname')
+                    action='store', dest='CSVname', required=True)
+parser.add_argument('--no-subdir', help='Save all images under a "Pinterest" folder',
+                    action='store_true', dest='no_subdir')
 parser.add_argument('--username', help='username',
-                    action='store', dest='login_name')
-parser.add_argument('--password', help='', action='store', dest='login_pass')
+                    action='store', dest='login_name', required=True)
+parser.add_argument('--password', help='', action='store', dest='login_pass', required=True)
 args = parser.parse_args()
 
 if args.CSVname:
     csvname = args.CSVname
-else:
-    csvname = str(input('Enter the "input CSV" name: '))
+
+if args.no_subdir:
+    no_subdir = args.no_subdir
 
 if args.login_name:
     login_name = args.login_name
-else:
-    login_name = str(input('Enter your pinterest email id: '))
 
-if args.CSVname:
+if args.login_pass:
     login_pass = args.login_pass
-else:
-    login_pass = str(input('Enter the pinterest password: '))
 
 dest_dir = csvname.split('.csv')[0]
 dest_dir = dest_dir + '/'
 
-try:
-    os.mkdir(dest_dir)
-except:
-    pass
+if not os.path.isdir(dest_dir):
+    try:
+        os.mkdir(dest_dir)
+    except:
+        print("couldn't create directory to save scrapped files")
 
 df = pd.read_csv(csvname)   # CSV with PINS' visual search URLs
 urls = df['PID_URLS']
 
-# create directories to save the images
-for i in range(len(df)):
-    pin_number = urls[i].split('/')[-3]
-    try:
-        os.mkdir(dest_dir + pin_number + '/')
-    except:
-        pass
+if not no_subdir:
+    # create directories to save the images
+    for i in range(len(df)):
+        pin_number = urls[i].split('/')[-3]
+        try:
+            os.mkdir(dest_dir + pin_number + '/')
+        except:
+            pass
 
 error_url = []
 
@@ -67,10 +73,11 @@ def login(driver, username, password):
     email = driver.find_element_by_xpath("//input[@type='email']")
     password = driver.find_element_by_xpath("//input[@type='password']")
     email.send_keys(login_name)
+    time.sleep(5.15456)
     password.send_keys(login_pass)
-    # driver.find_element_by_xpath("//div[@data-reactid='30']").click()
+    time.sleep(4.612)
     password.submit()
-    time.sleep(3)
+    time.sleep(4.1298328)
     print("Teleport Successful!")
 
 
@@ -127,8 +134,10 @@ def download_items(url_set, dest_dir, image_num):
         NONE
     """
 
+    i = 0;
     for index, url in enumerate(url_set):
-        path = dest_dir + image_num + "/" + str(index) + ".jpg"
+        path = dest_dir + image_num + str(i) + ".jpg"
+        i += 1
         # print(path)
         try:
             urllib.request.urlretrieve(url, path)
