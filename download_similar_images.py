@@ -43,6 +43,7 @@ if args.login_pass:
     login_pass = args.login_pass
 
 dest_dir = csvname.split('.csv')[0]
+dest_dir = dest_dir + '/'
 
 if not os.path.isdir(dest_dir):
     try:
@@ -54,6 +55,7 @@ df = pd.read_csv(csvname)   # CSV with PINS' visual search URLs
 urls = df['PID_URLS']
 
 if not no_subdir:
+    print('Creating sub directories')
     # create directories to save the images
     for i in range(len(df)):
         pin_number = urls[i].split('/')[-3]
