@@ -1,15 +1,14 @@
 # pinterest-web-scraper
 > *"Scraping Visually Similar Images from Pinterest"*
 
-![Meme](https://i.pinimg.com/originals/0f/c2/1f/0fc21fcd673f794c1d6222b177013342.png)
-
-<br>
+Very inspired by [SwatiModi](https://github.com/SwatiModi/pinterest-web-scraper)'s Pinterest scraper. But with improved design, some fixes and better terminal usage.
 
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
 
 ### Installation
+
 ##### 1. Download the repository
 
 Clone the base repository onto your desktop with `git` as follows:
@@ -21,7 +20,12 @@ $ git clone https://github.com/SwatiModi/pinterest-web-scraper
 ```console
 $ pip install -r requirements.txt
 ```
+
+* Will probably work with conda too.
+
 ##### 3. Install chrome driver
+
+Linux:
 
 ```console
 $ wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
@@ -33,32 +37,47 @@ $ sudo chmod +x /usr/bin/chromedriver
 
 ```
 
-### Usage
-I have tried a example on query "mens checked shirt" and pushed the resultant csv and folder here in the repo.
+osx:
 
-##### 1. Search for some product (eg. Black shoes) 
+```console
+$ wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_mac64.zip
+$ unzip chromedriver_mac64.zip
+
+$ sudo mv chromedriver /usr/bin/chromedriver
+$ sudo chown root:root /usr/bin/chromedriver
+$ sudo chmod +x /usr/bin/chromedriver
+
+```
+
+### Usage
+
+##### 1. Search for some product
+
 ```console
 $ python pinterest.py 
 ```
+
 or pass the search query category as a argument
+
 ```console
 $ python pinterest.py --category <search query>
 ```
 
 This will create a CSV of URLs to pins for the given search query
 
-![Pins' URLS](readme_images/csv1.png)
 
 ##### 2. Download the visually similar images
+
 ```console
-$ python dowload_similar_images.py 
+$ python dowload_similar_images.py
 ```
+
 This script reads all the URLs from the CSV created by previous script. For each pin URL, it downloads the visually similar images and saved in respective folders pin-wise.
 
-This will create a hierarchy of folders and images as follows:
 
-![Downloaded Images](readme_images/folders.png)
-<br>
-##### NOTE: 
-Web Scraping from many websites is Illegal. <br>
-This project is just for Learning and Fun.
+### Documentation
+
+```
+python pinterest.py --help
+python dowload_similar_images.py --help
+```
