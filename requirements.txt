@@ -22,5 +22,5 @@ soupsieve
 split-folders
 svgwrite
 Tree
-urllib3   
+urllib3
 wheel
