@@ -14,6 +14,11 @@ no_subdir = False
 login_name = ""
 login_pass = ""
 
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+
 # add argument parser for passing the target CSV for saving the image URLs and no. of pages to be scraped
 parser = argparse.ArgumentParser()
 parser.add_argument('--csv', help='CSV with PID URLs',
@@ -148,7 +153,7 @@ def download_items(url_set, dest_dir, image_num):
     return
 
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options = options)
 login(driver, login_name, login_pass)
 
 for i in range(len(urls)):
