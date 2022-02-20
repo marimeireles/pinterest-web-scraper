@@ -169,5 +169,6 @@ for i in range(len(urls)):
     # tagsCSV = pd.DataFrame({'Tags':tag_set})
     # tagsCSV.to_csv(str(dest_dir) + str(pin_number) + '/' + str(pin_number) + '_tags' + '.csv',index = False)
 
+    print("Downloading items")
     download_items(image_urlset[:50], str(dest_dir), str(pin_number))
     time.sleep(6)
